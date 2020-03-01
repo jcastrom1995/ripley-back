@@ -5,8 +5,8 @@ const app = express()
 const mongoose = require('mongoose')
 // Middleware
 const accessControlMiddleware = require('./middlewares/access-control')
-
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+// Solo por temas del desafio agrego en duro la url de conexión y no en el .env
+mongoose.connect('mongodb+srv://jcastrom:test123@cluster0-z05ko.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log('Conneced to Database'))
