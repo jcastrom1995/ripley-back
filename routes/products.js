@@ -39,6 +39,23 @@ router.post('/', async (req, res) => {
     }
 })
 
+// send Cart Products
+router.post('/cart', async (req, res) => {
+    const products = req.body.products
+    try {
+        const productsSchema = products.map(async product => {
+            const productMongo = await Product.findById(product.id)
+            productMongo.quantity = product.quantity
+            return productMongo
+        })
+        const output = await Promise.all(productsSchema)
+        res.status(201).json(output)
+
+    } catch(err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 // Updating one
 router.patch('/:id',  async (req, res) => {
     if (req.body.sku != null) {

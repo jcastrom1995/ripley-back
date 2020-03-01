@@ -36,6 +36,10 @@ const productSchema = new mongoose.Schema({
     percent: {
         type: String,
         required: true
+    },
+    quantity: {
+        type: Number,
+        required: false
     }
 })
 
